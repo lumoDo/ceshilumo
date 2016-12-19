@@ -1,4 +1,3 @@
-// var eventproxy = require('eventproxy');
 var superagent = require('superagent');
 var cheerio = require('cheerio');
 var asyncc = require('async');
@@ -15,41 +14,11 @@ superagent.get(cnodeUrl).end(function(err, res) {
     }
     var topicUrls = [];
     var $ = cheerio.load(res.text);
-
     $('#topic_list .topic_title').each(function(idx, element) {
         var $element = $(element);
         var href = url.resolve(cnodeUrl, $element.attr('href'));
-
 				topicUrls.push(href);
-
-				//  if (topicUrls.length>10) {
-				//  	return false;
-				//  }
     });
-//
-//     // var ep = new eventproxy();
-//     // ep.after('topic_html', topicUrls.length, function(topics) {
-//         // topics = topics.map(function(topicPair) {
-//         //     var topicUrl = topicPair[0];
-//         //     var topicHtml = topicPair[1];
-//         //     var $ = cheerio.load(topicHtml);
-//         //     return ({
-//         //         title: $('.topic_full_title').text().trim(),
-//         //         href: topicUrl,
-//         //         comment1: $(".reply_content").eq(0).text().trim(),
-// 				// 				author1: $('.user_name .dark').text(),
-//     		// 				score1: $('.big').text()
-//         //     });
-//         // });
-//     //     console.log('final:');
-//     //     console.log(topics);
-//     // });
-//     // topicUrls.forEach(function(topicUrl) {
-//     //     superagent.get(topicUrl).end(function(err, res) {
-//     //         console.log('fetch：' + topicUrl + 'successful');
-//     //         ep.emit('topic_html', [topicUrl, res.text]);
-//     //     });
-//     // });
 		//调用async并发函数，topicUrls为网址数组，并发数量为5，请求函数，请求成功函数
 		asyncc.mapLimit(topicUrls, 5, function (topicUrl, callback) {
 		  // fetchUrl(url, callback);
@@ -65,23 +34,18 @@ superagent.get(cnodeUrl).end(function(err, res) {
 			topics = topics.map(function(topicPair) {
 					var topicUrl = topicPair[0];
 					var topicHtml = topicPair[1];
-					var $ = cheerio.load(topicHtml);
+					var $q = cheerio.load(topicHtml);
 					return ({
-							title: $('.topic_full_title').text().trim(),
+							title: $q('.topic_full_title').text().trim(),
 							href: topicUrl,
-							comment1: $(".reply_content").eq(0).text().trim(),
-							author1: $('.user_name .dark').text(),
-							score1: $('.big').text()
+							comment1: $q(".reply_content").eq(0).text().trim(),
+							author1: $q('.user_name .dark').text(),
+							score1: $q('.big').text()
 					});
 			});
-		  //  console.log('final:');
-		  //  console.log(topics);
        ares.send(topics);
 		});
-
-
 });
-// ares.send('hello world');
 });
 app.listen(process.env.PORT || 5000);
 // app.listen(3000, function (req, res) {
