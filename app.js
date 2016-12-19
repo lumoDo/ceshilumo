@@ -9,23 +9,23 @@ var url = require('url');
 
 var cnodeUrl = 'https://cnodejs.org/';
 app.get('/', function (req, ares, next) {
-// superagent.get(cnodeUrl).end(function(err, res) {
-//     if (err) {
-//         return cnosole.error(err);
-//     }
-//     var topicUrls = [];
-//     var $ = cheerio.load(res.text);
-//
-//     $('#topic_list .topic_title').each(function(idx, element) {
-//         var $element = $(element);
-//         var href = url.resolve(cnodeUrl, $element.attr('href'));
-//
-// 				topicUrls.push(href);
-//
-// 				//  if (topicUrls.length>10) {
-// 				//  	return false;
-// 				//  }
-//     });
+superagent.get(cnodeUrl).end(function(err, res) {
+    if (err) {
+        return cnosole.error(err);
+    }
+    var topicUrls = [];
+    var $ = cheerio.load(res.text);
+
+    $('#topic_list .topic_title').each(function(idx, element) {
+        var $element = $(element);
+        var href = url.resolve(cnodeUrl, $element.attr('href'));
+
+				topicUrls.push(href);
+
+				//  if (topicUrls.length>10) {
+				//  	return false;
+				//  }
+    });
 //
 //     // var ep = new eventproxy();
 //     // ep.after('topic_html', topicUrls.length, function(topics) {
