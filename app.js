@@ -18,6 +18,9 @@ superagent.get(cnodeUrl).end(function(err, res) {
         var $element = $(element);
         var href = url.resolve(cnodeUrl, $element.attr('href'));
 				topicUrls.push(href);
+         if (topicUrls.length>10) {
+    				 	return false;
+    				 }
     });
 		//调用async并发函数，topicUrls为网址数组，并发数量为5，请求函数，请求成功函数
 		asyncc.mapLimit(topicUrls, 5, function (topicUrl, callback) {
