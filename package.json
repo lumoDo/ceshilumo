@@ -1,19 +1,17 @@
-{
+	{
   "name": "lesson5",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.0",
+  "description": "使用 eventproxy 控制并发",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "alsotang <alsotang@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "async": "^2.1.4",
-    "cheerio": "^0.22.0",
-    "eventproxy": "^0.3.5",
-    "express": "^4.14.0",
-    "superagent": "^3.3.0",
-    "utility": "^1.9.0"
+    "cheerio": "^0.17.0",
+    "eventproxy": "^0.3.1",
+    "superagent": "^0.20.0",
+      "async": "^2.1.4",
   }
 }
