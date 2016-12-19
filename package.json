@@ -1,4 +1,4 @@
-{
+	{
   "name": "lesson5",
   "version": "0.0.0",
   "description": "使用 eventproxy 控制并发",
@@ -13,5 +13,6 @@
     "eventproxy": "^0.3.1",
     "superagent": "^0.20.0",
       "async": "^2.1.4",
+       "express": "^4.14.0"
   }
 }
