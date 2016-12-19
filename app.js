@@ -1,7 +1,7 @@
 var eventproxy = require('eventproxy');
 var superagent = require('superagent');
 var cheerio = require('cheerio');
-var async = require('async');
+var asyncc = require('async');
 var express =require('express');
 // 建立 express 实例
 var app = express();
