@@ -4,11 +4,10 @@
 "description": "使用 async 控制并发",
 "main": "app.js",
 "dependencies": {
+  "async": "^2.1.4",
   "cheerio": "^0.17.0",
-  "express": "^4.9.5",
-  "superagent": "^0.20.0",
-	"async": "^2.1.4",
-	"express": "^4.14.0"
+  "express": "^4.14.0",
+  "superagent": "^0.20.0"
 },
 "devDependencies": {},
 "scripts": {

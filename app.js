@@ -1,4 +1,4 @@
-var eventproxy = require('eventproxy');
+// var eventproxy = require('eventproxy');
 var superagent = require('superagent');
 var cheerio = require('cheerio');
 var asyncc = require('async');
