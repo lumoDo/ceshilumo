@@ -1,7 +1,7 @@
 var eventproxy = require('eventproxy');
 var superagent = require('superagent');
 var cheerio = require('cheerio');
-var async = require('async');
+var asyncc = require('async');
 var express =require('express');
 // 建立 express 实例
 var app = express();
@@ -51,7 +51,7 @@ app.get('/', function (req, ares, next) {
 //     //     });
 //     // });
 		//调用async并发函数，topicUrls为网址数组，并发数量为5，请求函数，请求成功函数
-		async.mapLimit(topicUrls, 5, function (topicUrl, callback) {
+		asyncc.mapLimit(topicUrls, 5, function (topicUrl, callback) {
 		  // fetchUrl(url, callback);
 			//superagent get请求topicUrl，数组的循环单个网址，callback返回成功函数传递到
 			superagent.get(topicUrl).end(function(err, res) {
