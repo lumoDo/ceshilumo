@@ -1,7 +1,7 @@
 var eventproxy = require('eventproxy');
 var superagent = require('superagent');
 var cheerio = require('cheerio');
-var asyncc = require('async');
+var async = require('async');
 var express =require('express');
 // 建立 express 实例
 var app = express();
@@ -50,38 +50,38 @@ app.get('/', function (req, ares, next) {
 //     //         ep.emit('topic_html', [topicUrl, res.text]);
 //     //     });
 //     // });
-// 		//调用async并发函数，topicUrls为网址数组，并发数量为5，请求函数，请求成功函数
-// 		async.mapLimit(topicUrls, 5, function (topicUrl, callback) {
-// 		  // fetchUrl(url, callback);
-// 			//superagent get请求topicUrl，数组的循环单个网址，callback返回成功函数传递到
-// 			superagent.get(topicUrl).end(function(err, res) {
-// 			        console.log('fetch：' + topicUrl + 'successful');
-// 							//调用下面函数
-// 							callback(null,[topicUrl, res.text]);
-//
-// 			    });
-// 		}, function (err, topics) {
-// 			//接受callback返回的数组数据  并使用.map(function(){})返回一个新的数组
-// 			topics = topics.map(function(topicPair) {
-// 					var topicUrl = topicPair[0];
-// 					var topicHtml = topicPair[1];
-// 					var $ = cheerio.load(topicHtml);
-// 					return ({
-// 							title: $('.topic_full_title').text().trim(),
-// 							href: topicUrl,
-// 							comment1: $(".reply_content").eq(0).text().trim(),
-// 							author1: $('.user_name .dark').text(),
-// 							score1: $('.big').text()
-// 					});
-// 			});
-// 		  //  console.log('final:');
-// 		  //  console.log(topics);
-//        ares.send(topics);
-// 		});
-//
-//
-// });
-ares.send('hello world');
+		//调用async并发函数，topicUrls为网址数组，并发数量为5，请求函数，请求成功函数
+		async.mapLimit(topicUrls, 5, function (topicUrl, callback) {
+		  // fetchUrl(url, callback);
+			//superagent get请求topicUrl，数组的循环单个网址，callback返回成功函数传递到
+			superagent.get(topicUrl).end(function(err, res) {
+			        console.log('fetch：' + topicUrl + 'successful');
+							//调用下面函数
+							callback(null,[topicUrl, res.text]);
+
+			    });
+		}, function (err, topics) {
+			//接受callback返回的数组数据  并使用.map(function(){})返回一个新的数组
+			topics = topics.map(function(topicPair) {
+					var topicUrl = topicPair[0];
+					var topicHtml = topicPair[1];
+					var $ = cheerio.load(topicHtml);
+					return ({
+							title: $('.topic_full_title').text().trim(),
+							href: topicUrl,
+							comment1: $(".reply_content").eq(0).text().trim(),
+							author1: $('.user_name .dark').text(),
+							score1: $('.big').text()
+					});
+			});
+		  //  console.log('final:');
+		  //  console.log(topics);
+       ares.send(topics);
+		});
+
+
+});
+// ares.send('hello world');
 });
 app.listen(process.env.PORT || 5000);
 // app.listen(3000, function (req, res) {
